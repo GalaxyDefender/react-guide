@@ -15,7 +15,8 @@ class App extends Component {
       { id:"002", name: 'Manu', age: 29},
       { id:"003", name: 'Stan', age: 29}
     ],
-    showPerson: false
+    showPerson: false,
+    showCockpit: true
   }
 
   static getDerivedStateFromProps(props, state){
@@ -87,10 +88,12 @@ class App extends Component {
 
     return (
         <div className={styleMod.App}>
+          <button onClick={() => {this.setState({showCockpit: false});}}>Remove Cockpit</button>
+          { this.state.showCockpit ? (
           <Cockpit 
             showPerson={this.state.showPerson}
-            persons={this.state.persons}
-            clicked={this.togglePersonHandler}/>
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler}/>) : null }
           {persons}
         </div>
       
