@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import Radium, { StyleRoot } from 'radium';
 import styleMod from './App.css';
 import Person from './Person/Person';
+import ErrorBoundry from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -56,36 +57,40 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherent',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherent',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
       // ':hover': {
       //   backgroundColor: 'lightgreen',
       //   color: 'black'
       // }
-    };
+    // };
 
     let persons = null;
+    let btnClass = '';
 
     if( this.state.showPerson ) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
+            return <ErrorBoundry key={person.id}>
+              <Person 
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                changed={(event) => this.nameChangedHandler(event, person.id)} /> 
+              </ErrorBoundry>
           })}
         </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass = styleMod.Red;
+
+      // style.backgroundColor = 'red';
       // style[':hover'] = {
       //   backgroundColor: 'salmon',
       //   color: 'black'
@@ -103,10 +108,11 @@ class App extends Component {
     return (
       // <StyleRoot>
         <div className={styleMod.App}>
-          <h1>Hi, this is Quent</h1>
+          <h1>Hi, this is React</h1>
           <p className={classes.join(' ')}>This is a text</p>
           <button 
-            style={style}
+            // style={style}
+            className={btnClass}
             onClick={this.togglePersonHandler}>Toggle Persons</button>
             {persons}
         </div>
