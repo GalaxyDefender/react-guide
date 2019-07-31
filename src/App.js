@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import Radium, { StyleRoot } from 'radium';
 import styleMod from './App.css';
-import Person from './Person/Person';
+import Person from './Persons/Person/Person';
 // import ErrorBoundry from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
@@ -50,25 +49,12 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    // const persons = this.state.persons;
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
   }
 
   render() {
-    // const style = {
-    //   backgroundColor: 'green',
-    //   color: 'white',
-    //   font: 'inherent',
-    //   border: '1px solid blue',
-    //   padding: '8px',
-    //   cursor: 'pointer',
-      // ':hover': {
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black'
-      // }
-    // };
 
     let persons = null;
     let btnClass = '';
@@ -88,12 +74,6 @@ class App extends Component {
       );
 
       btnClass = styleMod.Red;
-
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // };
     };
 
     const classes = [];
@@ -105,20 +85,16 @@ class App extends Component {
     }
 
     return (
-      // <StyleRoot>
         <div className={styleMod.App}>
           <h1>Hi, this is React</h1>
           <p className={classes.join(' ')}>This is a text</p>
           <button 
-            // style={style}
             className={btnClass}
             onClick={this.togglePersonHandler}>Toggle Persons</button>
             {persons}
         </div>
-      // </StyleRoot>
       
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
    }
 }
 
