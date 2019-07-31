@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styleMod from './App.css';
-import Person from './Persons/Person/Person';
+import Person from './components/Persons/Person/Person';
 // import ErrorBoundry from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
