@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Radium, { StyleRoot } from 'radium';
-import './App.css';
+import styleMod from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -94,15 +94,15 @@ class App extends Component {
 
     const classes = [];
     if(this.state.persons.length <= 2) {
-      classes.push('red');
+      classes.push(styleMod.red);
     }
     if(this.state.persons.length <= 1) {
-      classes.push('bold');
+      classes.push(styleMod.bold);
     }
 
     return (
       // <StyleRoot>
-        <div className="App">
+        <div className={styleMod.App}>
           <h1>Hi, this is Quent</h1>
           <p className={classes.join(' ')}>This is a text</p>
           <button 
