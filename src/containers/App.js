@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import styleMod from './App.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+  }
   state = {
     persons: [
       { id:"001", name: 'Max', age: 28},
@@ -11,6 +16,19 @@ class App extends Component {
       { id:"003", name: 'Stan', age: 29}
     ],
     showPerson: false
+  }
+
+  static getDerivedStateFromProps(props, state){
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentWillMount() {
+    console.log('[App.js] componentWillMount');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   switchNameHandler = (newName) => {
@@ -55,43 +73,25 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
 
     let persons = null;
-    let btnClass = '';
 
     if( this.state.showPerson ) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person 
-                click={() => this.deletePersonHandler(index)}
-                key={person.id}
-                name={person.name}
-                age={person.age}
-                changed={(event) => this.nameChangedHandler(event, person.id)} /> 
-          })}
-        </div>
-      );
-
-      btnClass = styleMod.Red;
-    };
-
-    const classes = [];
-    if(this.state.persons.length <= 2) {
-      classes.push(styleMod.red);
-    }
-    if(this.state.persons.length <= 1) {
-      classes.push(styleMod.bold);
+      persons = 
+          <Persons 
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}/>;
     }
 
     return (
         <div className={styleMod.App}>
-          <h1>Hi, this is React</h1>
-          <p className={classes.join(' ')}>This is a text</p>
-          <button 
-            className={btnClass}
-            onClick={this.togglePersonHandler}>Toggle Persons</button>
-            {persons}
+          <Cockpit 
+            showPerson={this.state.showPerson}
+            persons={this.state.persons}
+            clicked={this.togglePersonHandler}/>
+          {persons}
         </div>
       
     );
