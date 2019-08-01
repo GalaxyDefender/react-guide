@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styleMod from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 // import ErrorBoundry from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
@@ -87,7 +88,7 @@ class App extends Component {
     }
 
     return (
-        <div className={styleMod.App}>
+        <WithClass classes={styleMod.App}>
           <button onClick={() => {this.setState({showCockpit: false});}}>Remove Cockpit</button>
           { this.state.showCockpit ? (
           <Cockpit 
@@ -95,7 +96,7 @@ class App extends Component {
             personsLength={this.state.persons.length}
             clicked={this.togglePersonHandler}/>) : null }
           {persons}
-        </div>
+        </WithClass>
       
     );
    }
